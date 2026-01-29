@@ -68,6 +68,9 @@ spec:
               value: {{ .Values.amqpBroker.user | quote }}
             - name: AMQP_PASSWORD
               value: {{ .Values.amqpBroker.password | quote }}
+            {{- with .Values.extraEnv }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
